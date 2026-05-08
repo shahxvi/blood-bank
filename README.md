@@ -1,1 +1,2 @@
-# csc248-group-project
+# Blood Bank
+A data structures group project
