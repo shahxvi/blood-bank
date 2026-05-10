@@ -1,19 +1,20 @@
 package com.bloodbank;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * Unit test for simple App.
- */
 public class AppTest {
-
-    /**
-     * Rigorous Test :-)
-     */
     @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
+    public void bloodTest() {
+        Blood blood = new Blood("A", 1);
+        assertEquals("A", blood.getBloodGroup());
+        assertEquals("A", blood.getBloodAntibody());
+
+        assertEquals("B", blood.getPlasmaAntibody());
+
+        assertEquals(0.445, blood.getRedCellVolume());
+        assertEquals(0.545, blood.getPlasmaVolume());
+        assertEquals(0.01, blood.getPlateletVolume());
     }
 }
