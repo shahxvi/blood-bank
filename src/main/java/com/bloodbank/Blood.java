@@ -28,7 +28,7 @@ public class Blood {
         }
 
         final double redCellPercentage = 0.445;
-        final double plasmaPercentage = 0.545
+        final double plasmaPercentage = 0.545;
         final double plateletPercentage = 0.01;
 
         this.redCellVolume = volume * redCellPercentage;
