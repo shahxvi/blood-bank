@@ -13,17 +13,17 @@ public class Blood {
     private double plateletVolume;
 
     public Blood(String bloodGroup, double volume) {
-        this.bloodGroup = bloodGroup;
-        this.bloodAntibody = bloodGroup;
+        this.bloodGroup = bloodGroup.toUpperCase();
+        this.bloodAntibody = bloodGroup.toUpperCase();
         this.volume = volume;
 
-        if (bloodGroup.equalsIgnoreCase("A")) {
+        if (bloodGroup.equals("A")) {
             this.plasmaAntibody = "B";
         } else if (bloodGroup.equalsIgnoreCase("B")) {
             this.plasmaAntibody = "A";
-        } else if (bloodGroup.equalsIgnoreCase("AB")) {
+        } else if (bloodGroup.equals("AB")) {
             this.plasmaAntibody = "";
-        } else if (bloodGroup.equalsIgnoreCase("O")) {
+        } else if (bloodGroup.equals("O")) {
             this.plasmaAntibody = "AB";
         }
 
