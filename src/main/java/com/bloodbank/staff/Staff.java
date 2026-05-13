@@ -1,7 +1,7 @@
 // MIT LICENSE
 // Copyright (c) 2026 Iqbal
 
-package com.bloocbank.staff;
+package com.bloodbank.staff;
 
 public class Staff {
 }
