@@ -1,5 +1,6 @@
 //MIT LICENSE
 //Copyright (c) 2026 Isya
+//Copyright (c) 2026 Maya	
 
 import com.bloodbank.io.Recordable;
 
@@ -11,13 +12,6 @@ public abstract Person implements Recordcable {
 	protected char gender;
 	protected int contact;
    
-   public person(){
-   	nric = 0;
-   	name = "";
-   	dob = "";
-   	gender = "";
-   	contact = 0;
-   }
    //Normal constructor 
    public person(int nric, String name, int contact){
    	this.nric = nric;
