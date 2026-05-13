@@ -3,21 +3,35 @@
 
 package com.bloodbank.io;
 
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public abstract class FileHandler<T extends Recordable> {
     protected File file;
     protected T[] objects;
 
+    /**
+     * Instantiate a FileHandler
+     * @param filePath
+     */
     protected FileHandler(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Reads all records from file and converts them
+     * into an array of objects of type {@code T}.
+     *
+     * @return an array containing all parsed records from the file
+     */
     protected abstract T[] praseRecods();
 
+    /**
+     * Write saved objects to file
+     * @return true if file is saved
+     */
     protected boolean saveRecords() {
         if (objects == null) {
             return false;
@@ -35,6 +49,9 @@ public abstract class FileHandler<T extends Recordable> {
         return true;
     }
 
+    /**
+     * @return the number of records in a file
+     */
     protected int getCount() {
         int i = 0;
         try (Scanner inputFile = new Scanner(file)) {
