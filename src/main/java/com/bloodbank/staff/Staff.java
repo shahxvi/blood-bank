@@ -21,7 +21,7 @@ public class Staff extends Person {
 		this.id = id;
 	}
 	
-	private void setPassword(int password) {
+	private void setPassword(String password) {
 		this.password = password;
 	}
 	/* Setters */
