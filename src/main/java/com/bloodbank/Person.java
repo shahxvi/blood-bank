@@ -1,21 +1,19 @@
 //MIT LICENSE
+//Copyright (c) 2026 Shah   
 //Copyright (c) 2026 Isya
 //Copyright (c) 2026 Maya   
-//Copyright (c) 2026 Shah   
 
 package com.bloodbank;
 
 import com.bloodbank.io.Recordable;
 
 public abstract class Person implements Recordable {
-    //Declare
     protected int nric;
     protected String name;
     protected String dob; // YY-MM-DD
     protected char gender;
     protected int contact;
   
-    //Normal constructor 
     protected Person(int nric, String name, int contact){
         String nricStr = Integer.toString(nric);
         this.nric = nric;
@@ -60,11 +58,17 @@ public abstract class Person implements Recordable {
         return contact;
     }
     /* Getters */
+
+    /* Printers */
     public String toString() {
-        return nric + name + dob + gender + contact;
+        return "Name: " + name +
+               "\nDate of Birth: " + dob +
+               "\nGender: " + gender +
+               "\nContact: " +contact;
     }
 
     public String toRecord() {
         return String.format("%d; %s; %c; %i", name, dob, gender, contact);
     }
+    /* Printers */
 }
