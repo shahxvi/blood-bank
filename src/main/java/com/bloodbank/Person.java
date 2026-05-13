@@ -1,7 +1,9 @@
 //MIT LICENSE
 //Copyright (c) 2026 Isya
 
-public abstract Person {
+import com.bloodbank.io.Recordable;
+
+public abstract Person implements Recordcable {
 	//Declare
 	protected int nric;
 	protected String name;
@@ -56,13 +58,7 @@ public abstract Person {
    public int getContact(){
    	return contact;
    }
- }
- //printer
- public void display(){
- 	System.out.print("IC Number: "+nric);
-    System.out.print("Name: "+name);
-    System.out.print("Date Of Birth: "+dob);
-    System.out.print("Gender: "+gender);
-    System.out.print("Contact Number: "+contact);
+   
+     public String toRecord();
  }
  
