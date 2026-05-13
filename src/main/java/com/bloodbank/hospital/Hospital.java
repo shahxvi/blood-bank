@@ -1,7 +1,11 @@
 // MIT LICENSE
 // Copyright (c) 2026 Shah
 
-public class Hospital {
+package com.bloodbank.hospital;
+
+import com.bloodbank.io.Recordable;
+
+public class Hospital implements Recordable {
     private String name;
     private String address;
     private int contact;
@@ -40,9 +44,15 @@ public class Hospital {
     }
     /* Getters */
 
+    /* Printers */
     public String toString() {
         return "Name: " + name +
                "\nAddress: " + address +
                "\nContact: " + contact;
     }
+
+    public String toRecord() {
+        return name + "; " + address + "; " + contact;
+    }
+    /* Printers */
 }
