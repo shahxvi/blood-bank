@@ -22,7 +22,7 @@ public class StaffFileHandler extends FileHandler<Staff> {
             int i = 0;
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
-                // objects[i++] = new Staff(tokens.nextToken(), tokens.nextToken(), Integer.parseInt(tokens.nextToken()));
+                objects[i++] = new Staff(tokens.nextToken(), tokens.nextToken(), Integer.parseInt(tokens.nextToken()));
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
