@@ -8,7 +8,7 @@ public class AppTest {
     @Test
     public void bloodTest() {
         Blood blood = new Blood("A", 1);
-        assertEquals("A", blood.getBloodGroup());
+        assertEquals("A", blood.getGroup());
         assertEquals("A", blood.getBloodAntibody());
 
         assertEquals("B", blood.getPlasmaAntibody());

@@ -4,11 +4,11 @@
 package com.bloodbank.io;
 
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.bloodbank.person.Staff;
+import com.bloodbank.util.LinkedList;
 
 public class StaffFileHandler extends FileHandler<Staff> {
     public StaffFileHandler(String inputFilePath) {

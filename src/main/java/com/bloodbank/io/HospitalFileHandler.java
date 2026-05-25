@@ -4,11 +4,11 @@
 package com.bloodbank.io;
 
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.bloodbank.recipient.Hospital;
+import com.bloodbank.util.LinkedList;
 
 public class HospitalFileHandler extends FileHandler<Hospital> {
     public HospitalFileHandler(String inputFilePath) {

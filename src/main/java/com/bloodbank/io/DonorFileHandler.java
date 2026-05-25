@@ -4,12 +4,12 @@
 package com.bloodbank.io;
 
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.bloodbank.Blood;
 import com.bloodbank.person.Donor;
+import com.bloodbank.util.LinkedList;
 
 public class DonorFileHandler extends FileHandler<Donor> {
     public DonorFileHandler(String filePath) {

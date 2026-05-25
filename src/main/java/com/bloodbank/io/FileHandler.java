@@ -6,8 +6,9 @@ package com.bloodbank.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.LinkedList;
 import java.util.Scanner;
+
+import com.bloodbank.util.LinkedList;
 
 public abstract class FileHandler<T extends Recordable> {
     protected File file;
