@@ -1,28 +1,33 @@
 // MIT LICENSE
 // Copyright (c) 2026 Shah
 
-package com.bloodbank.staff;
+package com.bloodbank.io;
 
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import com.bloodbank.io.FileHandler;
+import com.bloodbank.person.Staff;
 
 public class StaffFileHandler extends FileHandler<Staff> {
     public StaffFileHandler(String inputFilePath) {
         super(inputFilePath);
-        objects = new Staff[super.getCount()];
     }
 
     @Override
-    protected Staff[] praseRecods() {
+    public LinkedList parseRecords() {
         try (Scanner fileReader = new Scanner(super.file)) {
-            int i = 0;
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
-                objects[i++] = new Staff(tokens.nextToken(), tokens.nextToken(), Integer.parseInt(tokens.nextToken()));
+
+                String nric = tokens.nextToken();
+                String name = tokens.nextToken();
+                int contact = Integer.parseInt(tokens.nextToken());
+                int id = Integer.parseInt(tokens.nextToken());
+                String password = tokens.nextToken();
+
+                super.objects.insertAtBack(new Staff(nric, name, contact, id, password));
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

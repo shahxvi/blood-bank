@@ -1,27 +1,32 @@
 // MIT LICENSE
 // Copyright (c) 2026 Shah
 
-package com.bloodbank.hospital;
+package com.bloodbank.io;
 
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.io.FileNotFoundException;
 
-import com.bloodbank.io.FileHandler;
+import com.bloodbank.recipient.Hospital;
 
 public class HospitalFileHandler extends FileHandler<Hospital> {
     public HospitalFileHandler(String inputFilePath) {
         super(inputFilePath);
-        objects = new Hospital[super.getCount()];
     }
 
     @Override
-    public Hospital[] praseRecods() {
+    public LinkedList parseRecords() {
         try (Scanner fileReader = new Scanner(super.file)) {
-            int i = 0;
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
-                objects[i++] = new Hospital(tokens.nextToken(), tokens.nextToken(), Integer.parseInt(tokens.nextToken()));
+
+                String name = tokens.nextToken();
+                String address = tokens.nextToken();
+                double distance = Double.parseDouble(tokens.nextToken());
+                int contact = Integer.parseInt(tokens.nextToken());
+
+                super.objects.insertAtFront(new Hospital(name, address, distance, contact));
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

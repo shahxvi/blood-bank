@@ -1,18 +1,20 @@
 // MIT LICENSE
 // Copyright (c) 2026 Shah
 
-package com.bloodbank.hospital;
+package com.bloodbank.recipient;
 
 import com.bloodbank.io.Recordable;
 
 public class Hospital implements Recordable {
     private String name;
     private String address;
+    private double distance;
     private int contact;
 
-    public Hospital(String name, String address, int contact) {
+    public Hospital(String name, String address, double distance, int contact) {
         this.name = name;
         this.address = address;
+        this.distance = distance;
         this.contact = contact;
     }
 
@@ -23,6 +25,10 @@ public class Hospital implements Recordable {
 
     public void setAddress (String address) {
         this.address = address;
+    }
+
+    public void setDistance (double distance) {
+        this.distance = distance;
     }
 
     public void setContact (int contact) {
@@ -39,6 +45,10 @@ public class Hospital implements Recordable {
         return address;
     }
 
+    public double getDistance () {
+        return distance;
+    }
+
     public int getContact () {
         return contact;
     }
@@ -48,11 +58,12 @@ public class Hospital implements Recordable {
     public String toString() {
         return "Name: " + name +
                "\nAddress: " + address +
+               "\nDistance: " + distance + "KM" +
                "\nContact: " + contact;
     }
 
     public String toRecord() {
-        return name + "; " + address + "; " + contact;
+        return name + ";" + address + ";" + contact;
     }
     /* Printers */
 }

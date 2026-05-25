@@ -6,11 +6,12 @@ package com.bloodbank.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public abstract class FileHandler<T extends Recordable> {
     protected File file;
-    protected T[] objects;
+    protected LinkedList objects;
 
     /**
      * Instantiate a FileHandler
@@ -18,6 +19,7 @@ public abstract class FileHandler<T extends Recordable> {
      */
     protected FileHandler(String filePath) {
         file = new File(filePath);
+        objects = new LinkedList();
     }
 
     /**
@@ -26,20 +28,24 @@ public abstract class FileHandler<T extends Recordable> {
      *
      * @return an array containing all parsed records from the file
      */
-    protected abstract T[] praseRecods();
+    protected abstract LinkedList parseRecords();
 
     /**
      * Write saved objects to file
      * @return true if file is saved
      */
-    protected boolean saveRecords() {
-        if (objects == null) {
+    public boolean saveRecords(LinkedList objects) {
+        this.objects = objects;
+
+        if (this.objects == null) {
             return false;
         }
 
         try (PrintWriter outputFile = new PrintWriter(file)) {
-            for (int i = 0; i < getCount(); i++) {
-                outputFile.println(objects[i].toRecord());
+            T obj = (T) this.objects.getFirst();
+            while (obj != null) {
+                outputFile.println(obj.toRecord());
+                obj = (T) objects.getNext();
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

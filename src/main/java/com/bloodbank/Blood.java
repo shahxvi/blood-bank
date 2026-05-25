@@ -3,66 +3,75 @@
 
 package com.bloodbank;
 
-public class Blood {
-    private String bloodGroup;
+import com.bloodbank.io.Recordable;
+
+public class Blood implements Recordable {
+    private String group;
     private double volume;
-    private String bloodAntibody;
-    private String plasmaAntibody;
-    private double redCellVolume;
-    private double plasmaVolume;
-    private double plateletVolume;
 
-    public Blood(String bloodGroup, double volume) {
-        this.bloodGroup = bloodGroup.toUpperCase();
-        this.bloodAntibody = bloodGroup.toUpperCase();
+    public Blood(String group, double volume) {
+        this.group = group.toUpperCase();
         this.volume = volume;
-
-        if (bloodGroup.equals("A")) {
-            this.plasmaAntibody = "B";
-        } else if (bloodGroup.equalsIgnoreCase("B")) {
-            this.plasmaAntibody = "A";
-        } else if (bloodGroup.equals("AB")) {
-            this.plasmaAntibody = "";
-        } else if (bloodGroup.equals("O")) {
-            this.plasmaAntibody = "AB";
-        }
-
-        final double redCellPercentage = 0.445;
-        final double plasmaPercentage = 0.545;
-        final double plateletPercentage = 0.01;
-
-        this.redCellVolume = volume * redCellPercentage;
-        this.plasmaVolume = volume * plasmaPercentage;
-        this.plateletVolume = volume * plateletPercentage;
     }
 
     /* Getters */
-    public String getBloodGroup () {
-        return bloodGroup;
+    public String getGroup() {
+        return group;
     }
 
-    public double getVolume () {
+    public double getVolume() {
         return volume;
     }
 
-    public String getBloodAntibody () {
-        return bloodAntibody;
+    public String getBloodAntibody() {
+        return group;
     }
 
-    public String getPlasmaAntibody () {
+    public String getPlasmaAntibody() {
+        String plasmaAntibody = "";
+
+        if (group.contains("AB")) {
+            plasmaAntibody = "";
+        } else if (group.contains("B")) {
+            plasmaAntibody = "A";
+        } else if (group.contains("A")) {
+            plasmaAntibody = "B";
+        } else if (group.contains("O")) {
+            plasmaAntibody = "AB";
+        }
+
         return plasmaAntibody;
     }
 
-    public double getRedCellVolume () {
-        return redCellVolume;
+    public double getRedCellVolume() {
+        final double redCellPercentage = 0.445;
+        return volume * redCellPercentage;
     }
 
-    public double getPlasmaVolume () {
-        return plasmaVolume;
+
+    public double getPlasmaVolume() {
+        final double plasmaPercentage = 0.545;
+        return volume * plasmaPercentage;
     }
 
-    public double getPlateletVolume () {
-        return plateletVolume;
+    public double getPlateletVolume() {
+        final double plateletPercentage = 0.01;
+        return volume * plateletPercentage;
     }
     /* Getters */
+
+    /* Printers */
+    public String toString() {
+        return "Blood Group: " + group +
+               "\nPlasma Antibody: " + getPlasmaAntibody() + 
+               "\nFull Volume : " + volume + "mL" +
+               "\nRed Blood Cell Volume: " + getRedCellVolume() + "mL" +
+               "\nPlasma Volume: " + getPlasmaVolume() + "mL" +
+               "\nPlatelet Volume: " + getPlateletVolume() + "mL";
+    }
+
+    public String toRecord() {
+        return String.format("%s;%f", group, volume);
+    }
+    /* Printers */
 }
