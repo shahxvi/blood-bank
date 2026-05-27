@@ -5,17 +5,17 @@
 package com.bloodbank.person;
 
 public class Staff extends Person {
-    private int id;
+    private String id;
     private String password;
     
-    public Staff(String nric, String name, int contact, int id, String password) {
+    public Staff(String nric, String name, int contact, String id, String password) {
         super(nric, name, contact);
         this.id = id;
         this.password = password;
     }
     
     /* Setters */
-    private void setID(int id) {
+    private void setID(String id) {
         this.id = id;
     }
     
@@ -24,8 +24,8 @@ public class Staff extends Person {
     }
     /* Setters */
     
-    public boolean verifyCredentials(int id, String password){
-        if(id == this.id && this.password.equals(password))
+    public boolean verifyCredentials(String id, String password){
+        if(this.id.equals(id) && this.password.equals(password))
             return true;
         return false;
     }
