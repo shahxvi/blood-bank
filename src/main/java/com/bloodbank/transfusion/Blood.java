@@ -1,7 +1,7 @@
 // MIT LICENSE
 // Copyright (c) 2026 Shah
 
-package com.bloodbank;
+package com.bloodbank.transfusion;
 
 import com.bloodbank.io.Recordable;
 

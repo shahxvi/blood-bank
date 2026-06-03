@@ -4,7 +4,7 @@
 
 package com.bloodbank.person;
 
-import com.bloodbank.Blood;
+import com.bloodbank.transfusion.Blood;
 
 public class Donor extends Person {
     private Blood blood;

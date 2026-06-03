@@ -2,6 +2,7 @@ package com.bloodbank;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.bloodbank.transfusion.Blood;
 import org.junit.jupiter.api.Test;
 
 public class AppTest {

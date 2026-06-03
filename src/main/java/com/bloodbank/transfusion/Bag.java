@@ -1,7 +1,7 @@
 // MIT LICENSE
 // Copyright (c) 2026 Marzell
 
-package com.bloodbank;
+package com.bloodbank.transfusion;
 
 public class Bag {
 }

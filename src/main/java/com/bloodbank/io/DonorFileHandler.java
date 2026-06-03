@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import com.bloodbank.Blood;
+import com.bloodbank.transfusion.Blood;
 import com.bloodbank.person.Donor;
 import com.bloodbank.util.LinkedList;
 
