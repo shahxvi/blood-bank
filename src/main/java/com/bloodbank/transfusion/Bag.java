@@ -38,6 +38,7 @@ public class Bag implements Recordable {
 
     @Override
     public String toString() {
+        return null;
     }
 
     @Override
