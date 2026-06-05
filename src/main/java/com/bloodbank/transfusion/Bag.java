@@ -38,13 +38,13 @@ public class Bag implements Recordable {
 
     @Override
     public String toString() {
-        return null;
+        return "Donor's NRIC: "+donor.getNRIC() +
+                "Transfusion date: " + getTransfusionDateTime() +
+                "Expiry date: "+getExpiryDate();
     }
 
     @Override
     public String toRecord() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        return transfusionDateTime.format(formatter);
+        return donor.toRecord() + ";" + transfusionDateTime;
     }
 }
