@@ -51,4 +51,11 @@ public class HospitalUI extends UI {
      */
     public static void removeHospital() {
     }
+
+    /**
+     * Menu to edit hospital from hospital list
+     * @author Maya
+     */
+    public static void editHospital() {
+    }
 }
