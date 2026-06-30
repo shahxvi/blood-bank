@@ -23,7 +23,7 @@ public class StaffFileHandler extends FileHandler<Staff> {
 
                 String nric = tokens.nextToken();
                 String name = tokens.nextToken();
-                int contact = Integer.parseInt(tokens.nextToken());
+                String contact = tokens.nextToken();
                 String id = tokens.nextToken();
                 String password = tokens.nextToken();
 

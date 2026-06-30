@@ -8,7 +8,7 @@ public class Staff extends Person {
     private String id;
     private String password;
     
-    public Staff(String nric, String name, int contact, String id, String password) {
+    public Staff(String nric, String name, String contact, String id, String password) {
         super(nric, name, contact);
         this.id = id;
         this.password = password;

@@ -10,9 +10,9 @@ import com.bloodbank.io.Recordable;
 public abstract class Person implements Recordable {
     protected String nric;
     protected String name;
-    protected int contact;
+    protected String contact;
   
-    protected Person(String nric, String name, int contact){
+    protected Person(String nric, String name, String contact){
         this.nric = nric;
         this.name = name;
         this.contact = contact;
@@ -27,7 +27,7 @@ public abstract class Person implements Recordable {
         this.name = name;
     }
 
-    protected void setContact(int contact){
+    protected void setContact(String contact){
         this.contact = contact;
     }
     /* Setters */
@@ -49,7 +49,7 @@ public abstract class Person implements Recordable {
         return ((nric.charAt(11) - '0') & 1) == 0 ? 'F' : 'M';
     }
 
-    public int getContact(){
+    public String getContact(){
         return contact;
     }
     /* Getters */
@@ -64,7 +64,7 @@ public abstract class Person implements Recordable {
     }
 
     public String toRecord() {
-        return String.format("%s;%s;%d", nric, name, contact);
+        return String.format("%s;%s;%s", nric, name, contact);
     }
     /* Printers */
 }

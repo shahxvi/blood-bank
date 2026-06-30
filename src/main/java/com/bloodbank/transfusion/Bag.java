@@ -8,7 +8,6 @@ import com.bloodbank.person.Donor;
 import com.bloodbank.io.Recordable;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Bag implements Recordable {
     private static final int SHELF_LIFE_DAYS = 42;

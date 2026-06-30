@@ -24,7 +24,7 @@ public class HospitalFileHandler extends FileHandler<Hospital> {
                 String name = tokens.nextToken();
                 String address = tokens.nextToken();
                 double distance = Double.parseDouble(tokens.nextToken());
-                int contact = Integer.parseInt(tokens.nextToken());
+                String contact = tokens.nextToken();
 
                 super.objects.insertAtFront(new Hospital(name, address, distance, contact));
             }

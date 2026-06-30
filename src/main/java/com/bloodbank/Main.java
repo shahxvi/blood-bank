@@ -3,52 +3,40 @@
 
 package com.bloodbank;
 
-import javax.swing.JOptionPane;
-
-import com.bloodbank.io.StaffFileHandler;
-import com.bloodbank.person.Staff;
+import com.bloodbank.ui.*;
 import com.bloodbank.util.LinkedList;
+import com.bloodbank.io.HospitalFileHandler;
+import com.bloodbank.io.StaffFileHandler;
 
 public class Main {
-    static Staff loggedInStaff;
-    static LinkedList staffList = new StaffFileHandler("data/staffs.txt").parseRecords();
+    static StaffFileHandler staffFileHandler = new StaffFileHandler("data/staffs.txt");
+    static LinkedList staffList = staffFileHandler.parseRecords();
+
+    static HospitalFileHandler hospitalFileHandler = new HospitalFileHandler("data/hospitals.txt");
+    static LinkedList hospitalList = hospitalFileHandler.parseRecords();
+
+    static boolean logout = false;
 
     public static void main(String[] args) {
-        login();
-    }
+        UI.login(staffList);
 
-    /**
-     * Login menu for staffs
-     * @author Shah
-     */
-    static void login() {
-        String id = null;
-        String password = null;
-        boolean loggedIn = false;
-
-        do {
-            id = JOptionPane.showInputDialog("Blood Bank Management System\n\nPlease enter your ID");
-            if (id == null) {
-                break;
-            }
-
-            password = JOptionPane.showInputDialog("Please enter your password");
-            if (password == null || id.isEmpty()) {
-                continue;
-            }
-
-            loggedInStaff = (Staff) staffList.getFirst();
-            while (loggedInStaff != null) {
-                if (loggedInStaff.verifyCredentials(id, password)) {
-                    JOptionPane.showMessageDialog(null, "Welcome " + loggedInStaff.getName() + "!");
-                    loggedIn = true;
+        while (!logout) {
+            switch (UI.mainMenu()) {
+                case "Manage Donor Queue":
+                    DonorUI.menu();
                     break;
-                }
-                loggedInStaff = (Staff) staffList.getNext();
+                case "Manage Blood Bag":
+                    BloodBagUI.menu();
+                    break;
+                case "Manage Hospital List":
+                    HospitalUI.menu(hospitalList);
+                    break;
+                case "":
+                    logout = true;
             }
-            if (!loggedIn) {
-                JOptionPane.showMessageDialog(null, "Incorrect ID or Password");
-            }
-        } while (!loggedIn);
+        }
+
+        hospitalFileHandler.saveRecords(hospitalList);
+        staffFileHandler.saveRecords(staffList);
     }
 }

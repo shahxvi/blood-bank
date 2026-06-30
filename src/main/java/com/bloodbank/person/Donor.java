@@ -9,7 +9,7 @@ import com.bloodbank.transfusion.Blood;
 public class Donor extends Person {
     private Blood blood;
 
-    public Donor(String nric, String name, int contact, Blood blood) {
+    public Donor(String nric, String name, String contact, Blood blood) {
         super(nric, name, contact);
         this.blood = blood;
     }

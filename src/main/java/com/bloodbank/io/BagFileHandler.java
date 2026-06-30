@@ -27,7 +27,7 @@ public class BagFileHandler extends FileHandler<Bag> {
 
                 String nric = tokens.nextToken();
                 String name = tokens.nextToken();
-                int contact = Integer.parseInt(tokens.nextToken());
+                String contact = tokens.nextToken();
                 Blood blood = new Blood(tokens.nextToken(), Double.parseDouble(tokens.nextToken()));
                 LocalDateTime transfusionDateTime = LocalDateTime.parse(tokens.nextToken());
 

@@ -9,9 +9,9 @@ public class Hospital implements Recordable {
     private String name;
     private String address;
     private double distance;
-    private int contact;
+    private String contact;
 
-    public Hospital(String name, String address, double distance, int contact) {
+    public Hospital(String name, String address, double distance, String contact) {
         this.name = name;
         this.address = address;
         this.distance = distance;
@@ -31,7 +31,7 @@ public class Hospital implements Recordable {
         this.distance = distance;
     }
 
-    public void setContact (int contact) {
+    public void setContact (String contact) {
         this.contact = contact;
     }
     /* Setters */
@@ -49,7 +49,7 @@ public class Hospital implements Recordable {
         return distance;
     }
 
-    public int getContact () {
+    public String getContact () {
         return contact;
     }
     /* Getters */
@@ -63,7 +63,7 @@ public class Hospital implements Recordable {
     }
 
     public String toRecord() {
-        return name + ";" + address + ";" + contact;
+        return name + ";" + address + ";" + distance + ";" + contact;
     }
     /* Printers */
 }
