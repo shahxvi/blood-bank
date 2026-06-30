@@ -1,15 +1,11 @@
 package com.bloodbank.ui;
 
-import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 import com.bloodbank.person.Staff;
 import com.bloodbank.util.LinkedList;
 
 public class UI {
-    static Scanner keyboard = new Scanner(System.in);
-
     /**
      * Menu for staffs
      * @author Shah
@@ -17,8 +13,8 @@ public class UI {
     public static String mainMenu() {
 
         String[] options = { "Manage Donor Queue", "Manage Blood Bag" , "Manage Hospital List" };
-        String chosenOption = (String) JOptionPane.showInputDialog(null, "Please choose an inventory",
-                "Choose Inventory", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        String chosenOption = (String) JOptionPane.showInputDialog(null, "Please choose your option",
+                "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
         if (chosenOption == null) {
             return "";
@@ -42,7 +38,7 @@ public class UI {
         do {
             id = JOptionPane.showInputDialog("Blood Bank Management System\n\nPlease enter your ID");
             if (id == null) {
-                break;
+                return null;
             }
 
             password = JOptionPane.showInputDialog("Please enter your password");

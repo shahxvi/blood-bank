@@ -18,20 +18,17 @@ public class Main {
     static boolean logout = false;
 
     public static void main(String[] args) {
-        UI.login(staffList);
+        if (UI.login(staffList) != null) {
+            while (!logout) {
+                String chosenOption = UI.mainMenu();
 
-        while (!logout) {
-            switch (UI.mainMenu()) {
-                case "Manage Donor Queue":
+                if (chosenOption.equals("Manage Donor Queue"))
                     DonorUI.menu();
-                    break;
-                case "Manage Blood Bag":
+                else if (chosenOption.equals("Manage Blood Bag"))
                     BloodBagUI.menu();
-                    break;
-                case "Manage Hospital List":
+                else if (chosenOption.equals("Manage Hospital List"))
                     HospitalUI.menu(hospitalList);
-                    break;
-                case "":
+                else
                     logout = true;
             }
         }

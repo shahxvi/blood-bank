@@ -2,6 +2,7 @@ package com.bloodbank.ui;
 
 import javax.swing.JOptionPane;
 
+import com.bloodbank.recipient.Hospital;
 import com.bloodbank.util.LinkedList;
 
 public class HospitalUI extends UI {
@@ -14,14 +15,15 @@ public class HospitalUI extends UI {
         Object[] options = { "Add Hospital", "Remove Hospital" };
         String str = "Please choose your option";
 
-        int chosenOption = JOptionPane.showOptionDialog(null, str, "Manage Hospital List", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        int chosenOption = JOptionPane.showOptionDialog(null, str, "Manage Hospital List", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        System.out.println(chosenOption);
 
         switch (chosenOption) {
-            case 1:
-                addHospital();
+            case 0:
+                addHospital(hospitalList);
                 break;
-            case 2:
+            case 1:
                 removeHospital();
                 break;
         }
@@ -30,8 +32,17 @@ public class HospitalUI extends UI {
     /**
      * Menu to add hospital
      * @author Isya
+     * @author Shah
      */
-    public static void addHospital() {
+    public static void addHospital(LinkedList hospitalList) {
+        String name = JOptionPane.showInputDialog("Enter Hospital Name");
+        String address = JOptionPane.showInputDialog("Enter Hospital Address");
+        String distanceStr = JOptionPane.showInputDialog("Enter Hospital's Distance from Blood Bank (KM)");
+        double distance = Double.parseDouble(distanceStr);
+        String contact = JOptionPane.showInputDialog("Enter Hospital's Contact Number");
+
+        hospitalList.insertAtBack(new Hospital(name, address, distance, contact));
+        JOptionPane.showMessageDialog(null, "Hospital successfully added");
     }
 
     /**
