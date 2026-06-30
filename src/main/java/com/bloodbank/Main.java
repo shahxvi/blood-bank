@@ -4,39 +4,23 @@
 package com.bloodbank;
 
 import com.bloodbank.ui.*;
-import com.bloodbank.util.LinkedList;
-import com.bloodbank.util.Queue;
-import com.bloodbank.io.HospitalFileHandler;
-import com.bloodbank.io.StaffFileHandler;
 
 public class Main {
-    static StaffFileHandler staffFileHandler = new StaffFileHandler("staffs.txt");
-    static LinkedList staffList = staffFileHandler.parseRecords();
-
-    static HospitalFileHandler hospitalFileHandler = new HospitalFileHandler("hospitals.txt");
-    static LinkedList hospitalList = hospitalFileHandler.parseRecords();
-
-    static Queue donorQueue = new Queue();
-
     static boolean logout = false;
-
     public static void main(String[] args) {
-        if (UI.login(staffList) != null) {
+        if (UI.login() != null) {
             while (!logout) {
                 String chosenOption = UI.mainMenu();
 
                 if (chosenOption.equals("Manage Donor Queue"))
-                    DonorUI.menu(donorQueue);
+                    DonorUI.menu();
                 else if (chosenOption.equals("Manage Blood Bag"))
                     BloodBagUI.menu();
                 else if (chosenOption.equals("Manage Hospital List"))
-                    HospitalUI.menu(hospitalList);
+                    HospitalUI.menu();
                 else
                     logout = true;
             }
         }
-
-        hospitalFileHandler.saveRecords(hospitalList);
-        staffFileHandler.saveRecords(staffList);
     }
 }

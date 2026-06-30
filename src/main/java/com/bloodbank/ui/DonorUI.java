@@ -7,16 +7,15 @@ import com.bloodbank.transfusion.Blood;
 import com.bloodbank.util.Queue;
 
 public class DonorUI {
+    static Queue donorQueue = new Queue();
 
     /**
      * Menu for donor operations
      * @author Shah
      */
-    public static void menu(Queue donorQueue) {
-        Object[] options = { "Check Donor Queue", "Search Donor", "Add Donor", "Remove Donor"};
-        String str = "Please choose your option";
-
-        int chosenOption = JOptionPane.showOptionDialog(null, str, "Manage Donors", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+    public static void menu() {
+        Object[] options = { "Check Donor Queue", "Search Donor", "Add Donor", "Remove Donor" };
+        int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your option", "Manage Donors", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
         switch (chosenOption) {
             case 0:
@@ -26,7 +25,7 @@ public class DonorUI {
                 searchDonor();
                 break;
             case 2:
-                addDonor(donorQueue);
+                addDonor();
                 break;
             case 3:
                 removeDonor();
@@ -53,19 +52,16 @@ public class DonorUI {
      * @author Shah
      * @author Isya
      */
-    public static void addDonor(Queue donorQueue) {
+    public static void addDonor() {
         String ic = JOptionPane.showInputDialog(null, "Enter Donor's IC");
         String name = JOptionPane.showInputDialog(null, "Enter Donor's Name");
         String contact = JOptionPane.showInputDialog(null, "Enter Donor's Contact");
 
         /* Blood Group */
-        Object[] bloodG = { "A", "B","AB","O" };
-        String str = "Please Choose Donor's Blood Group";
-
-        int chosenOption = JOptionPane.showOptionDialog(null, str, "Donor's Blood Group", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, bloodG, bloodG[0]);
-
         String bloodGroup = null;
 
+        Object[] bloodG = { "A", "B","AB","O" };
+        int chosenOption = JOptionPane.showOptionDialog(null, "Please Choose Donor's Blood Group", "Donor's Blood Group", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, bloodG, bloodG[0]);
         switch (chosenOption) {
             case 0: bloodGroup = "A"; break;
             case 1: bloodGroup = "B"; break;
@@ -76,10 +72,7 @@ public class DonorUI {
 
         /* Rh Group */
         Object[] rh = { "+", "-" };
-        str = "Please Choose Donor's Blood Rh";
-
-        chosenOption = JOptionPane.showOptionDialog(null, str, "Donor's Blood Group", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, rh, rh[0]);
-
+        chosenOption = JOptionPane.showOptionDialog(null, "Please Choose Donor's Blood Rh", "Donor's Blood Group", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, rh, rh[0]);
         switch (chosenOption) {
             case 0: bloodGroup += "+"; break;
             case 1: bloodGroup += "-"; break;

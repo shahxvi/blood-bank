@@ -110,4 +110,19 @@ public class LinkedList {
             return current.data;
         }
     }
+
+    /**
+     * 
+     * @return size of LinkedList
+     */
+    public int getSize() {
+        int size = 0;
+        Object object = getFirst();
+        while (object != null) {
+            size++;
+            object = getNext();
+        }
+
+        return size;
+    }
 }

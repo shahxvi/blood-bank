@@ -2,10 +2,14 @@ package com.bloodbank.ui;
 
 import javax.swing.JOptionPane;
 
+import com.bloodbank.io.StaffFileHandler;
 import com.bloodbank.person.Staff;
 import com.bloodbank.util.LinkedList;
 
 public class UI {
+    static StaffFileHandler staffFileHandler = new StaffFileHandler("data/staffs.txt");
+    static LinkedList staffList = staffFileHandler.parseRecords();
+
     /**
      * Menu for staffs
      * @author Shah
@@ -28,7 +32,7 @@ public class UI {
      * @return Logged in Staff
      * @author Shah
      */
-    public static Staff login(LinkedList staffList) {
+    public static Staff login() {
         String id = null;
         String password = null;
         boolean loggedIn = false;
