@@ -7,7 +7,7 @@ import com.bloodbank.transfusion.Blood;
 import com.bloodbank.util.Queue;
 
 public class DonorUI {
-    static Queue donorQueue = new Queue();
+    public static Queue donorQueue = new Queue();
 
     /**
      * Menu for donor operations
@@ -41,10 +41,54 @@ public class DonorUI {
     }
 
     /**
-     * Menu for searchign for a donor
+     * Menu for searching for a donor
      * @author Marzell
      */
     public static void searchDonor() {
+        Object[] searchOption = { "Search by IC", "Search by name" };
+        int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your search method", "Search Donor", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, searchOption, searchOption[0]);
+
+        if(chosenOption == -1){
+            return;
+        }
+
+        String keyword;
+
+        if(chosenOption == 0){
+            keyword = JOptionPane.showInputDialog(null, "Enter Donor's IC");
+        }
+        else {
+            keyword = JOptionPane.showInputDialog(null, "Enter Donor's name");
+        }
+
+        if(keyword == null || keyword.isEmpty()){
+            return;
+        }
+
+        Donor foundDonor = null;
+        Donor current = (Donor) DonorUI.donorQueue.getFirst();
+
+        while (current != null) {
+            boolean matches;
+            if (chosenOption == 0) {
+                matches = current.getNRIC().equalsIgnoreCase(keyword);
+            } else {
+                matches = current.getName().equalsIgnoreCase(keyword);
+            }
+
+            if (matches) {
+                foundDonor = current;
+                break;
+            }
+
+            current = (Donor) DonorUI.donorQueue.getNext();
+        }
+
+        if (foundDonor != null) {
+            JOptionPane.showMessageDialog(null, "Donor Found:\n" + foundDonor);
+        } else {
+            JOptionPane.showMessageDialog(null, "\nNo donor matching" + keyword + "was found in the queue.");
+        }
     }
 
     /**
