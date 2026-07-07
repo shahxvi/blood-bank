@@ -5,16 +5,18 @@ package com.bloodbank;
 
 import javax.swing.JOptionPane;
 
-import com.bloodbank.io.FileHandler;
+import com.bloodbank.io.HospitalFileHandler;
 import com.bloodbank.recipient.Hospital;
 import com.bloodbank.ui.*;
 import com.bloodbank.util.LinkedList;
 import com.bloodbank.util.Queue;
 
 public class Main {
-    static FileHandler h = new FileHandler("data/hospitals.txt");
+    static HospitalFileHandler h = new HospitalFileHandler("data/hospitals.txt");
     static LinkedList hospitalList = h.parseRecords();
+
     public static void main(String[] args) {
+        System.out.println(hospitalList.getSize());
         boolean logout = false;
         while (!logout) {
             Object[] options = {"List blood bags", "", ""};
@@ -37,7 +39,6 @@ public class Main {
         Object[] obj = new Object[hospitalList.getSize()];
 
         if (obj.length == 0) {
-            JOptionPane.showMessageDialog(null, "Empty");
             return;
         }
 
@@ -47,7 +48,9 @@ public class Main {
             hospital = (Hospital) hospitalList.getNext();
         }
 
-        String chosenHospital = (String) JOptionPane.showInputDialog(null, "Which hospital would you like to remove?", "Remove Item", JOptionPane.QUESTION_MESSAGE, null, obj, obj[0]);
+        System.out.println(obj[0].toString());
+
+        String chosenHospital = (String) JOptionPane.showInputDialog(null, "Which hospital would you like to check", "Check Blood Bag", JOptionPane.QUESTION_MESSAGE, null, obj, obj[0]);
         if (chosenHospital == null) {
             return;
         }
@@ -57,7 +60,7 @@ public class Main {
             if (chosenHospital.equals(hospital.getName())) {
                 break;
             }
-            hospital = (Hospital) Main.hospitalList.getNext();
+            hospital = (Hospital) hospitalList.getNext();
         }
 
         for(int j = 0; j < hospital.getBloodBags().size(); j++) {

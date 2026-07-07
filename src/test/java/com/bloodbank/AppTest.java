@@ -2,7 +2,7 @@ package com.bloodbank;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.bloodbank.io.FileHandler;
+import com.bloodbank.io.HospitalFileHandler;
 import com.bloodbank.util.LinkedList;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
  */
 public class AppTest {
     @Test
-    public void FileHandlerTest() {
-        FileHandler h = new FileHandler("data/hospitals.txt");
+    public void HospitalFileHandlerTest() {
+        HospitalFileHandler h = new HospitalFileHandler("data/hospitals.txt");
         LinkedList hospitalList = h.parseRecords();
-        assertTrue(hospitalList != null);
+        assertTrue(hospitalList.getFirst() != null);
     }
 }

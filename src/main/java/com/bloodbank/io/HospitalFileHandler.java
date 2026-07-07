@@ -17,14 +17,14 @@ import com.bloodbank.transfusion.Blood;
 import com.bloodbank.transfusion.BloodBag;
 import com.bloodbank.util.LinkedList;
 
-public class FileHandler {
-    protected File file;
+public class HospitalFileHandler {
+    private File file;
 
     /**
      * Instantiate a FileHandler
      * @param filePath
      */
-    public FileHandler(String filePath) {
+    public HospitalFileHandler(String filePath) {
         file = new File(filePath);
     }
 
@@ -34,24 +34,25 @@ public class FileHandler {
     public LinkedList parseRecords() {
         LinkedList objects = new LinkedList();
 
+        Hospital hospital = null;
+
         try (Scanner fileReader = new Scanner(file)) {
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
 
                 // Hospital
-                String name = tokens.nextToken();
+                String hospitalName = tokens.nextToken();
                 String address = tokens.nextToken();
-                String contact = tokens.nextToken();
+                String hospitalContact = tokens.nextToken();
 
                 int noBloodBags = Integer.parseInt(tokens.nextToken());
-
 
                 ArrayList<BloodBag> bloodBags = new ArrayList<>();
 
                 for(int i = 0; i < noBloodBags; i++){
                     String nric = tokens.nextToken();
-                    name = tokens.nextToken();
-                    contact = tokens.nextToken();
+                    String name = tokens.nextToken();
+                    String contact = tokens.nextToken();
                     Blood blood = new Blood(tokens.nextToken(), Double.parseDouble(tokens.nextToken()));
                     LocalDateTime transfusionDateTime = LocalDateTime.parse(tokens.nextToken());
 
@@ -59,8 +60,11 @@ public class FileHandler {
                     bloodBags.add(bloodBag);
                 }
 
-                Hospital hospital = new Hospital(name, address, contact, bloodBags);
+                hospital = new Hospital(hospitalName, address, hospitalContact, bloodBags);
+
+                objects.insertAtBack(hospital);
             }
+
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
