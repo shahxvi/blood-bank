@@ -15,6 +15,8 @@ import com.bloodbank.util.Queue;
 public class Main {
     public static StaffFileHandler staffFileHandler = new StaffFileHandler("data/staffs.txt");
     public static LinkedList staffList = staffFileHandler.parseRecords();
+    public static BloodBagFileHandler bloodbagFileHandler = new StaffFileHandler("data/hospitalBloodBags.txt");
+    public static LinkedList bloodBagList = bloodbagFileHandler.parseRecords();
     public static HospitalFileHandler hospitalFileHandler = new HospitalFileHandler("data/hospitals.txt");
     public static LinkedList hospitalList = hospitalFileHandler.parseRecords();
     public static Queue donorQueue = new Queue();
