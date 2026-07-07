@@ -1,0 +1,20 @@
+KPJ Penang Specialist Hospital;570, Jalan Perda Utama, 14000 Bukit Mertajam;045481688;0
+Hospital Lam Wah Ee;141, Jalan Tan Sri Teh Ewe Lim, 11600 George Town;046569999;1
+Island Hospital;308, Macalister Road, 10450 George Town;042388888;2
+Penang Adventist Hospital;465, Jalan Burma, 10350 George Town;042222001;3
+KPJ Johor Specialist Hospital;40-B, Jalan Abdul Samad, 80100 Johor Bahru;072253000;4
+Putra Medical Centre;34, Jalan Tun Razak, 75400 Melaka;062899999;5
+Mahkota Medical Centre;No. 4, Mahkota Melaka, Jalan Merdeka, 75000 Melaka;062851999;6
+Beacon Hospital;2, Jalan 215, Section 51, 46100 Petaling Jaya;0376275400;7
+Ara Damansara Medical Centre;3, Jalan Lapangan Terbang Subang, 47200 Petaling Jaya;0378333000;8
+KPJ Damansara Specialist Hospital;120, Jalan SS20/10, 47400 Petaling Jaya;0377192692;9
+Subang Jaya Medical Centre;2, Jalan SS12/1A, 47500 Subang Jaya;0356381212;10
+Thomson Hospital Kota Damansara;12, Jalan Teknologi, PJU 5, 47810 Petaling Jaya;0362871111;11
+Avisena Specialist Hospital;5, Jalan Ikhtisas, Seksyen 14, 40000 Shah Alam;0355209000;12
+Columbia Asia Hospital Setapak;No. 2, Jalan Danau Saujana, Off Jalan Genting Klang, 53300 Kuala Lumpur;0341419999;13
+Prince Court Medical Centre;40, Jalan Kia Peng, 50450 Kuala Lumpur;0321610000;14
+KPJ Ampang Puteri Specialist Hospital;2, Jalan Mamanda 9, Taman Dato Ahmad Razali, 68000 Ampang;0342702500;15
+Gleneagles Hospital Kuala Lumpur;283 & 286, Jalan Ampang, 50450 Kuala Lumpur;0341413000;16
+Sunway Medical Centre;6, Jalan Lagoon Selatan, Bandar Sunway, 47500 Subang Jaya;0374919191;17
+Pantai Hospital Kuala Lumpur;9, Jalan Bukit Pantai, 59100 Kuala Lumpur;0322960888;18
+Kuala Lumpur General Hospital;Jalan Pahang, 50587 Kuala Lumpur;0326155555;19
