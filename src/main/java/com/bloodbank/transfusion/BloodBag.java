@@ -19,10 +19,6 @@ public class BloodBag implements Recordable {
         this.transfusionDateTime = transfusionDateTime;
     }
 
-    public int getBloodBagId() {
-        return bloodBagId;
-    }
-
     public Donor getDonor() {
         return donor;
     }

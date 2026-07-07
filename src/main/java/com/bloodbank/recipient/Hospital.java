@@ -4,19 +4,18 @@
 package com.bloodbank.recipient;
 
 import com.bloodbank.io.Recordable;
+import com.bloodbank.transfusion.BloodBag;
 
 import java.util.ArrayList;
 
 public class Hospital implements Recordable {
-    private int hospitalId;
     private String name;
     private String address;
     private double distance;
     private String contact;
     private ArrayList<BloodBag> bloodBags;
 
-    public Hospital(int hospitalId, String name, String address, double distance, String contact, ArrayList<BloodBag> bloodBags) {
-        this.hospitalId = hospitalId;
+    public Hospital(String name, String address, double distance, String contact, ArrayList<BloodBag> bloodBags) {
         this.name = name;
         this.address = address;
         this.distance = distance;
@@ -25,10 +24,6 @@ public class Hospital implements Recordable {
     }
 
     /* Setters */
-    public void setHospitalId(int hospitalId) {
-        this.hospitalId = hospitalId;
-    }
-
     public void setName (String name) {
         this.name = name;
     }
@@ -52,10 +47,6 @@ public class Hospital implements Recordable {
     /* Setters */
 
     /* Getters */
-    public int getHospitalId() {
-        return hospitalId;
-    }
-
     public String getName() {
         return name;
     }
@@ -68,22 +59,21 @@ public class Hospital implements Recordable {
         return contact;
     }
 
-    public void getBloodBags() {
+    public ArrayList<BloodBag> getBloodBags() {
         return bloodBags;
     }
     /* Getters */
 
     /* Printers */
     public String toString() {
-        return "Hospital ID: " + hospitalId +
-               "\nName: " + name +
+        return "Name: " + name +
                "\nAddress: " + address +
                "\nContact: " + contact +
                "\nBlood Bags: " + bloodBags;
     }
 
     public String toRecord() {
-        return hospitalId + ";" + name + ";" + address + ";" + contact + ";" + bloodBags;
+        return name + ";" + address + ";" + contact + ";" + bloodBags;
     }
     /* Printers */
 }
