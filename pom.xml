@@ -4,11 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.bloodbank</groupId>
-  <artifactId>blood-bank</artifactId>
-  <version>0.0</version>
+  <artifactId>bloodbank</artifactId>
+  <version>0.1</version>
 
-  <name>blood-bank</name>
-  <url>https://github.com/shahxvi/blood-bank</url>
+  <name>bloodbank</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -66,11 +67,11 @@
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.4.2</version>
           <configuration>
-            <archive>
-              <manifest>
-                <mainClass>com.bloodbank.Main</mainClass>
-              </manifest>
-            </archive>
+              <archive>
+                <manifest>
+                  <mainClass>com.bloodbank.Main</mainClass>
+                </manifest>
+              </archive>
           </configuration>
         </plugin>
         <plugin>
