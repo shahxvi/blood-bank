@@ -125,4 +125,23 @@ public class LinkedList {
 
         return size;
     }
+
+    public void removeCurrent() {
+        if (current == null) {
+            return;
+        }
+
+        if (current == first) {
+            removeFromFront();
+        } else if (current == last) {
+            removeFromBack();
+        } else {
+            Node prevNode = first;
+            while (prevNode.next != current) {
+                prevNode = prevNode.next;
+            }
+            prevNode.next = current.next;
+            current = prevNode; // Move current back to the previous node
+        }
+    }
 }
