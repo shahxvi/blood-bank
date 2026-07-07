@@ -53,10 +53,11 @@ public class HospitalFileHandler {
                     String nric = tokens.nextToken();
                     String name = tokens.nextToken();
                     String contact = tokens.nextToken();
-                    Blood blood = new Blood(tokens.nextToken(), Double.parseDouble(tokens.nextToken()));
+                    Blood blood = new Blood(tokens.nextToken());
                     LocalDateTime transfusionDateTime = LocalDateTime.parse(tokens.nextToken());
+                    double bloodVolume = Double.parseDouble(tokens.nextToken());
 
-                    BloodBag bloodBag = new BloodBag(new Donor(nric, name, contact, blood), transfusionDateTime);
+                    BloodBag bloodBag = new BloodBag(new Donor(nric, name, contact, blood), transfusionDateTime, bloodVolume);
                     bloodBags.add(bloodBag);
                 }
 
@@ -75,17 +76,20 @@ public class HospitalFileHandler {
     /**
      * Write saved objects to file
      * @return true if file is saved
+     */
 
-    public boolean saveRecords(LinkedList objects) {
-        if (objects == null) {
+    public boolean saveRecords(LinkedList hospitalList) {
+        if (hospitalList == null) {
             return false;
         }
 
         try (PrintWriter outputFile = new PrintWriter(file)) {
-            T obj = (T) objects.getFirst();
-            while (obj != null) {
-                outputFile.println(obj.toRecord());
-                obj = (T) objects.getNext();
+            Hospital hospital = (Hospital) hospitalList.getFirst();
+            while (hospital != null) {
+                for (int i = 0; i < hospital.getBloodBags().size(); i++) {
+                    outputFile.println(hospital.toRecord(i));
+                }
+                hospital = (Hospital) hospitalList.getNext();
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -94,12 +98,11 @@ public class HospitalFileHandler {
 
         return true;
     }
-    */
 
     /**
      * @return the number of records in a file
      */
-    protected int getCount() {
+    protected int getSize() {
         int i = 0;
         try (Scanner inputFile = new Scanner(file)) {
             while (inputFile.hasNext()) {

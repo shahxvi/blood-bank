@@ -9,16 +9,17 @@ import com.bloodbank.io.HospitalFileHandler;
 import com.bloodbank.person.Donor;
 import com.bloodbank.recipient.Hospital;
 import com.bloodbank.transfusion.Blood;
+import com.bloodbank.transfusion.BloodBag;
 import com.bloodbank.util.LinkedList;
 import com.bloodbank.util.Queue;
 
 import java.util.Stack;
 
 public class Main {
-    static HospitalFileHandler h = new HospitalFileHandler("data/hospitals.txt");
-    static LinkedList hospitalList = h.parseRecords();
+    static HospitalFileHandler hospitalFileHandler = new HospitalFileHandler("data/hospitals.txt");
+    static LinkedList hospitalList = hospitalFileHandler.parseRecords();
     static Queue donorQueue = new Queue();
-    static Stack bloodStack = new Stack();
+    static Stack<BloodBag> bloodStack = new Stack<>();
 
     public static void main(String[] args) {
         System.out.println(hospitalList.getSize());
@@ -27,22 +28,17 @@ public class Main {
             Object[] options = {"List blood bags", "Add donor", ""};
             int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your option", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             switch (chosenOption) {
-                case 0:
-                    listBloodBags();
-                    break;
-                case 1:
-                    addDonor();
-                    break;
-                case 2:
-                    transferBloodBag();
-                    break;
-                default:
-                    logout = true;
+                case 0: listBloodBags(); break;
+                case 1: addDonor(); break;
+                case 2: transferBloodBag(); break;
+                default: logout = true;
             }
         }
+
+        hospitalFileHandler.saveRecords(hospitalList);
     }
 
-    public static void listBloodBags() {
+    static void listBloodBags() {
         Object[] obj = new Object[hospitalList.getSize()];
 
         if (obj.length == 0) {
@@ -75,7 +71,7 @@ public class Main {
         }
     }
 
-    public static void addDonor() {
+    static void addDonor() {
         String ic = JOptionPane.showInputDialog(null, "Enter Donor's IC");
         String name = JOptionPane.showInputDialog(null, "Enter Donor's Name");
         String contact = JOptionPane.showInputDialog(null, "Enter Donor's Contact");
@@ -102,15 +98,17 @@ public class Main {
         }
         /* Blood Group */
 
-        double volume = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter Donor's Transfusion Volume (mL)"));
-        Blood blood = new Blood(bloodGroup, volume);
+        Blood blood = new Blood(bloodGroup);
         Donor donor = new Donor(ic, name, contact, blood);
         donorQueue.enqueue(donor);
 
-        JOptionPane.showMessageDialog(null, "Donor " + donor.getName() + " donorAdded to Queue");
+        JOptionPane.showMessageDialog(null, "Donor " + donor.getName() + " to Queue");
     }
 
-    public static void transferBloodBag() {
+    static void transfusion() {
+        double volume = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter Donor's Transfusion Volume (mL)"));
+    }
 
+    static void transferBloodBag() {
     }
 }

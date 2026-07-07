@@ -3,12 +3,11 @@
 
 package com.bloodbank.recipient;
 
-import com.bloodbank.io.Recordable;
 import com.bloodbank.transfusion.BloodBag;
 
 import java.util.ArrayList;
 
-public class Hospital implements Recordable {
+public class Hospital {
     private String name;
     private String address;
     private String contact;
@@ -66,8 +65,8 @@ public class Hospital implements Recordable {
                "\nBlood Bags: " + bloodBags;
     }
 
-    public String toRecord() {
-        return name + ";" + address + ";" + contact + ";" + bloodBags;
+    public String toRecord(int recordNumber) {
+        return name + ";" + address + ";" + contact + ";" + bloodBags.size() + ";" + bloodBags.get(recordNumber).toRecord();
     }
     /* Printers */
 }

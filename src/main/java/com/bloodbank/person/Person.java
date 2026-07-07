@@ -5,9 +5,7 @@
 
 package com.bloodbank.person;
 
-import com.bloodbank.io.Recordable;
-
-public abstract class Person implements Recordable {
+public abstract class Person {
     protected String nric;
     protected String name;
     protected String contact;

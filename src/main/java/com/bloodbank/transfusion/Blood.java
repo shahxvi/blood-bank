@@ -3,24 +3,16 @@
 
 package com.bloodbank.transfusion;
 
-import com.bloodbank.io.Recordable;
-
-public class Blood implements Recordable {
+public class Blood {
     private String group;
-    private double volume;
 
-    public Blood(String group, double volume) {
+    public Blood(String group) {
         this.group = group.toUpperCase();
-        this.volume = volume;
     }
 
     /* Getters */
     public String getGroup() {
         return group;
-    }
-
-    public double getVolume() {
-        return volume;
     }
 
     public String getBloodAntibody() {
@@ -42,36 +34,16 @@ public class Blood implements Recordable {
 
         return plasmaAntibody;
     }
-
-    public double getRedCellVolume() {
-        final double redCellPercentage = 0.445;
-        return volume * redCellPercentage;
-    }
-
-
-    public double getPlasmaVolume() {
-        final double plasmaPercentage = 0.545;
-        return volume * plasmaPercentage;
-    }
-
-    public double getPlateletVolume() {
-        final double plateletPercentage = 0.01;
-        return volume * plateletPercentage;
-    }
     /* Getters */
 
     /* Printers */
     public String toString() {
         return "Blood Group: " + group +
-               "\nPlasma Antibody: " + getPlasmaAntibody() + 
-               "\nFull Volume : " + volume + "mL" +
-               "\nRed Blood Cell Volume: " + getRedCellVolume() + "mL" +
-               "\nPlasma Volume: " + getPlasmaVolume() + "mL" +
-               "\nPlatelet Volume: " + getPlateletVolume() + "mL";
+               "\nPlasma Antibody: " + getPlasmaAntibody();
     }
 
     public String toRecord() {
-        return group + ";" + volume;
+        return group;
     }
     /* Printers */
 }
