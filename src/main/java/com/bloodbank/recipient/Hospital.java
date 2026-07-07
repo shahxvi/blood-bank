@@ -65,8 +65,12 @@ public class Hospital {
                "\nBlood Bags: " + bloodBags;
     }
 
-    public String toRecord(int recordNumber) {
-        return name + ";" + address + ";" + contact + ";" + bloodBags.size() + ";" + bloodBags.get(recordNumber).toRecord();
+    public String toRecord() {
+        String record = name + ";" + address + ";" + contact + ";" + bloodBags.size() + ";";
+        for (int i = 0; i < bloodBags.size(); i++) {
+            record += (";" + bloodBags.get(i).toRecord());
+        }
+        return record;
     }
     /* Printers */
 }

@@ -86,9 +86,7 @@ public class HospitalFileHandler {
         try (PrintWriter outputFile = new PrintWriter(file)) {
             Hospital hospital = (Hospital) hospitalList.getFirst();
             while (hospital != null) {
-                for (int i = 0; i < hospital.getBloodBags().size(); i++) {
-                    outputFile.println(hospital.toRecord(i));
-                }
+                outputFile.println(hospital.toRecord());
                 hospital = (Hospital) hospitalList.getNext();
             }
         } catch (FileNotFoundException e) {

@@ -27,6 +27,7 @@ public class Main {
     static Queue tempQueue = new Queue();
 
     static Stack<BloodBag> bloodBagStack = new Stack<>();
+    static Stack tempStack = new Stack();
 
     static LinkedList aBloodBagList = new LinkedList();
     static LinkedList bBloodBagList = new LinkedList();
@@ -197,14 +198,18 @@ public class Main {
     }
 
     static void sortBloodBagStack() {
-        BloodBag bloodBag = bloodBagStack.pop();
-        while (bloodBag != null) {
-            bloodBag = bloodBagStack.pop();
+        while (!bloodBagStack.isEmpty()) {
+            BloodBag bloodBag = bloodBagStack.pop();
             String bloodGroup = bloodBag.getDonor().getBlood().getGroup();
-            if (bloodGroup.contains("A"))       aBloodBagList.insertAtBack(bloodBag);
-            else if (bloodGroup.contains("B"))  bBloodBagList.insertAtBack(bloodBag);
-            else if (bloodGroup.contains("AB")) abBloodBagList.insertAtBack(bloodBag);
-            else if (bloodGroup.contains("O"))  oBloodBagList.insertAtBack(bloodBag);
+            if (bloodGroup.startsWith("A"))       aBloodBagList.insertAtBack(bloodBag);
+            else if (bloodGroup.startsWith("B"))  bBloodBagList.insertAtBack(bloodBag);
+            else if (bloodGroup.startsWith("AB")) abBloodBagList.insertAtBack(bloodBag);
+            else if (bloodGroup.startsWith("O"))  oBloodBagList.insertAtBack(bloodBag);
+            tempStack.push(bloodBag);
+        }
+
+        while(!tempStack.isEmpty()) {
+            bloodBagStack.push((BloodBag) tempStack.pop());
         }
     }
 
