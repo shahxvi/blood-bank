@@ -18,6 +18,7 @@ public class Main {
     public static HospitalFileHandler hospitalFileHandler = new HospitalFileHandler("data/hospitals.txt");
     public static LinkedList hospitalList = hospitalFileHandler.parseRecords();
     public static Queue donorQueue = new Queue();
+    public static Queue hospitalQueue = new Queue();
 
     public static void main(String[] args) {
         if (login() == null) {

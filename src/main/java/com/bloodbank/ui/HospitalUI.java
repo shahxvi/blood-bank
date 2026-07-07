@@ -125,6 +125,53 @@ public class HospitalUI {
      * @author Marzell
      */
     public static void searchHospital() {
-        //TODO: Implment searchHospital() by hospitalId
+        if (Main.donorQueue.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Donor Queue is Empty");
+            return;
+        }
+
+        Object[] searchOption = { "Search by hospital ID", "Search by address" };
+        int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your search method", "Search hospital", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, searchOption, searchOption[0]);
+
+        if (chosenOption == -1){
+            return;
+        }
+
+        String keywordHospital;
+
+        if (chosenOption == 0){
+            keywordHospital = JOptionPane.showInputDialog(null, "Enter hospital ID");
+        } else {
+            keywordHospital = JOptionPane.showInputDialog(null, "Enter hospital address");
+        }
+
+        if (keyword == null || keyword.isEmpty()){
+            return;
+        }
+
+        Hospital foundHospital = null;
+        Hospital currentHospital = (Hospital) Main.hospitalQueue.getFirst();
+
+        while (currentHospital != null) {
+            boolean matches;
+            if (chosenOption == 0) {
+                matches = current.getNRIC().equalsIgnoreCase(keyword);
+            } else {
+                matches = current.getName().equalsIgnoreCase(keyword);
+            }
+
+            if (matches) {
+                foundHospital = currentHospital;
+                break;
+            }
+
+            currentHospital = (Hospital) Main.hospitalQueue.getNext();
+        }
+
+        if (foundHospital != null) {
+            JOptionPane.showMessageDialog(null, "Hospital Found:\n\n" + foundHospital);
+        } else {
+            JOptionPane.showMessageDialog(null, "\nNo hospital matching " + keyword + "was found in the queue");
+        }
     }
 }
