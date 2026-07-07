@@ -61,7 +61,9 @@ public class HospitalUI extends UI {
         hospital = (Hospital) hospitalList.getFirst();
         for (int i = 0; i < obj.length; i++) {
             if (chosenHospital.equals(hospital.toRecord())){
-                //TODO: remove chosen hospital from hospitallist
+                hospitalList.removeCurrent();
+                System.out.println("[SUCCESS] Hospital '" + hospital.getName() + "' successfully removed.");
+                break;
             }
             hospital = (Hospital) hospitalList.getNext();
         }
