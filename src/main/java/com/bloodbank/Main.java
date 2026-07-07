@@ -48,6 +48,8 @@ public class Main {
         }
 
         hospitalFileHandler.saveRecords(hospitalList);
+        sortBloodBagList();
+        bloodBagFileHandler.saveRecords(bloodBagList);
     }
 
     static void listBloodBags() {
@@ -133,11 +135,15 @@ public class Main {
         double volume = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter " + donor.getName() + " Transfusion Volume (mL)"));
 
         bloodBagStack.add(new BloodBag(donor, LocalDateTime.now(), volume));
+
+        sortBloodBagStack();
+
         JOptionPane.showMessageDialog(null, "Blood Bag Added to Stack");
     }
 
     static void transferBloodBag() {
         if (bloodBagStack.isEmpty() || bloodBagStack == null){
+            JOptionPane.showMessageDialog(null, "Blood Bag Stack is Empty");
             return;
         }
 
@@ -173,20 +179,12 @@ public class Main {
 
         // 3. Send one chosen blood bag group to the hospital
         int size = 0;
-        if (bloodGroup.contains("A"))       size = aBloodBagList.getSize();
-        else if (bloodGroup.contains("B"))  size = bBloodBagList.getSize();
-        else if (bloodGroup.contains("AB")) size = abBloodBagList.getSize();
-        else if (bloodGroup.contains("O"))  size = oBloodBagList.getSize();
+        if (bloodGroup.startsWith("A"))       size = aBloodBagList.getSize();
+        else if (bloodGroup.startsWith("B"))  size = bBloodBagList.getSize();
+        else if (bloodGroup.startsWith("AB")) size = abBloodBagList.getSize();
+        else if (bloodGroup.startsWith("O"))  size = oBloodBagList.getSize();
 
-        obj = new Object[size];
-        int i = 0;
-        while (i < obj.length) {
-            obj[i] = i++;
-        }
-
-        String numberToSendStr = (String) JOptionPane.showInputDialog(null, "Which hospital would you like to send blood bag to?", "Send blood bag", JOptionPane.QUESTION_MESSAGE, null, obj, obj[0]);
-        if (numberToSendStr == null) return;
-        int numberToSend = Integer.parseInt(numberToSendStr);
+        int numberToSend = Integer.parseInt(JOptionPane.showInputDialog("Number of Available O Blood Bag: #" + size + "\nPlease Enter Amount"));
 
         for (int j = 0; j < numberToSend; j++) {
             if (bloodGroup.contains("A"))       hospital.getBloodBags().add((BloodBag) aBloodBagList.removeFromFront());
@@ -194,6 +192,8 @@ public class Main {
             else if (bloodGroup.contains("AB")) hospital.getBloodBags().add((BloodBag) abBloodBagList.removeFromFront());
             else if (bloodGroup.contains("O"))  hospital.getBloodBags().add((BloodBag) oBloodBagList.removeFromFront());
         }
+
+        JOptionPane.showMessageDialog(null, "Blood Bag Transfered");
     }
 
     static void sortBloodBagStack() {
