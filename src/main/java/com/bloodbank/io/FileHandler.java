@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import com.bloodbank.util.LinkedList;
 
@@ -42,19 +43,21 @@ public class FileHandler {
 
                 Hospital hospital = new Hospital(hospitalId, name, address, distance, contact);
 
+                int noBloodBags = Integer.parseInt(tokens.nextToken());
+
+
                 ArrayList<BloodBag> bloodBags = new ArrayList<>();
 
-                // Blood Bag
-                String nric = tokens.nextToken();
-                String name = tokens.nextToken();
-                String contact = tokens.nextToken();
-                Blood blood = new Blood(tokens.nextToken(), Double.parseDouble(tokens.nextToken()));
-                LocalDateTime transfusionDateTime = LocalDateTime.parse(tokens.nextToken());
+                for(int i = 0; i < noBloodBags; i++){
+                    String nric = tokens.nextToken();
+                    name = tokens.nextToken();
+                    contact = tokens.nextToken();
+                    Blood blood = new Blood(tokens.nextToken(), Double.parseDouble(tokens.nextToken()));
+                    LocalDateTime transfusionDateTime = LocalDateTime.parse(tokens.nextToken());
 
-                BloodBag = new BloodBag(BloodBag(bloodBagId, new Donor(nric, name, contact, blood), transfusionDateTime));
-
-                //super.objects.insertAtBack(new BloodBag(bloodBagId, new Donor(nric, name, contact, blood), transfusionDateTime));
-                //super.objects.insertAtBack(new Hospital(hospitalId, name, address, distance, contact));
+                    BloodBag bloodBag = new BloodBag(BloodBag(bloodBagId, new Donor(nric, name, contact, blood), transfusionDateTime));
+                    bloodBags.add(bloodBag);
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
