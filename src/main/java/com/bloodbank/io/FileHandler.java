@@ -39,12 +39,9 @@ public class FileHandler {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
 
                 // Hospital
-                int hospitalId = Integer.parseInt(tokens.nextToken());
                 String name = tokens.nextToken();
                 String address = tokens.nextToken();
-                double distance = Double.parseDouble(tokens.nextToken());
                 String contact = tokens.nextToken();
-
 
                 int noBloodBags = Integer.parseInt(tokens.nextToken());
 
@@ -62,7 +59,7 @@ public class FileHandler {
                     bloodBags.add(bloodBag);
                 }
 
-                Hospital hospital = new Hospital(name, address, distance, contact, bloodBags);
+                Hospital hospital = new Hospital(name, address, contact, bloodBags);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

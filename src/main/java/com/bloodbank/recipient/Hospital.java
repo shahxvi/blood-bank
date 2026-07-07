@@ -11,14 +11,12 @@ import java.util.ArrayList;
 public class Hospital implements Recordable {
     private String name;
     private String address;
-    private double distance;
     private String contact;
     private ArrayList<BloodBag> bloodBags;
 
-    public Hospital(String name, String address, double distance, String contact, ArrayList<BloodBag> bloodBags) {
+    public Hospital(String name, String address, String contact, ArrayList<BloodBag> bloodBags) {
         this.name = name;
         this.address = address;
-        this.distance = distance;
         this.contact = contact;
         this.bloodBags = bloodBags;
     }
@@ -30,10 +28,6 @@ public class Hospital implements Recordable {
 
     public void setAddress (String address) {
         this.address = address;
-    }
-
-    public void setDistance (double distance) {
-        this.distance = distance;
     }
 
     public void setContact (String contact) {
