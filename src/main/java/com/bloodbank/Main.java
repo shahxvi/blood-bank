@@ -21,7 +21,7 @@ public class Main {
     static LinkedList hospitalList = hospitalFileHandler.parseRecords();
     static Queue donorQueue = new Queue();
     static Queue tempQueue = new Queue();
-    static Stack<BloodBag> bloodStack = new Stack<>();
+    static Stack<BloodBag> bloodBagStack = new Stack<>();
 
     public static void main(String[] args) {
         System.out.println(hospitalList.getSize());
@@ -120,10 +120,37 @@ public class Main {
         Donor donor = (Donor) donorQueue.dequeue();
         double volume = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter " + donor.getName() + " Transfusion Volume (mL)"));
 
-        bloodStack.add(new BloodBag(donor, LocalDateTime.now(), volume));
+        bloodBagStack.add(new BloodBag(donor, LocalDateTime.now(), volume));
         JOptionPane.showMessageDialog(null, "Blood Bag Added to Stack");
     }
 
     static void transferBloodBag() {
+        if(bloodBagStack.isEmpty() || bloodBagStack == null){
+            return;
+        }
+
+        Object[] obj = new Object[hospitalList.getSize()];
+        Hospital hospital = (Hospital) hospitalList.getFirst();
+        for (int i = 0; i < obj.length; i++) {
+            obj[i++] = hospital.getName();
+            hospital = (Hospital) hospitalList.getNext();
+        }
+
+        String chosenHospital = (String) JOptionPane.showInputDialog(null, "Which hospital would you like to send blood bag to?", "Send blood bag", JOptionPane.QUESTION_MESSAGE, null, obj, obj[0]);
+        if (chosenHospital == null) {
+            return;
+        }
+
+        hospital = (Hospital) hospitalList.getFirst();
+        for (int i = 0; i < obj.length; i++) {
+            if (chosenHospital.equals(hospital.getName())) {
+                break;
+            }
+            hospital = (Hospital) hospitalList.getNext();
+        }
+    }
+
+    static void sortBloodBagStack() {
+
     }
 }
