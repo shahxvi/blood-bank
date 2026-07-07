@@ -8,12 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 import com.bloodbank.person.Donor;
-import com.bloodbank.recipient.Hospital;
 import com.bloodbank.transfusion.Blood;
 import com.bloodbank.transfusion.BloodBag;
 import com.bloodbank.util.LinkedList;
@@ -35,8 +32,6 @@ public class BloodBagFileHandler {
     public LinkedList parseRecords() {
         LinkedList objects = new LinkedList();
 
-        Hospital hospital = null;
-
         try (Scanner fileReader = new Scanner(file)) {
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
@@ -51,7 +46,6 @@ public class BloodBagFileHandler {
                 BloodBag bloodBag = new BloodBag(new Donor(nric, name, contact, blood), transfusionDateTime, bloodVolume);
                 objects.insertAtBack(bloodBag);
             }
-
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -64,16 +58,16 @@ public class BloodBagFileHandler {
      * @return true if file is saved
      */
 
-    public boolean saveRecords(Stack<BloodBag> bloodBagStack) {
-        if (bloodBagStack == null || bloodBagStack.isEmpty()) {
+    public boolean saveRecords(LinkedList bloodBagList) {
+        if (bloodBagList == null || bloodBagList.isEmpty()) {
             return false;
         }
 
         try (PrintWriter outputFile = new PrintWriter(file)) {
-            BloodBag bloodBag = bloodBagStack.pop();
+            BloodBag bloodBag = (BloodBag) bloodBagList.removeFromFront();
             while (bloodBag != null) {
                 outputFile.println(bloodBag.toRecord());
-                bloodBag = (BloodBag) bloodBagStack.pop();
+                bloodBag = (BloodBag) bloodBagList.removeFromFront();
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
