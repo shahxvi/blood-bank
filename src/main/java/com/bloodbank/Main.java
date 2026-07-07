@@ -6,28 +6,35 @@ package com.bloodbank;
 import javax.swing.JOptionPane;
 
 import com.bloodbank.io.HospitalFileHandler;
+import com.bloodbank.person.Donor;
 import com.bloodbank.recipient.Hospital;
-import com.bloodbank.ui.*;
+import com.bloodbank.transfusion.Blood;
 import com.bloodbank.util.LinkedList;
 import com.bloodbank.util.Queue;
+
+import java.util.Stack;
 
 public class Main {
     static HospitalFileHandler h = new HospitalFileHandler("data/hospitals.txt");
     static LinkedList hospitalList = h.parseRecords();
+    static Queue donorQueue = new Queue();
+    static Stack bloodStack = new Stack();
 
     public static void main(String[] args) {
         System.out.println(hospitalList.getSize());
         boolean logout = false;
         while (!logout) {
-            Object[] options = {"List blood bags", "", ""};
+            Object[] options = {"List blood bags", "Add donor", ""};
             int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your option", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             switch (chosenOption) {
                 case 0:
                     listBloodBags();
                     break;
                 case 1:
+                    addDonor();
                     break;
                 case 2:
+                    transferBloodBag();
                     break;
                 default:
                     logout = true;
@@ -66,5 +73,44 @@ public class Main {
         for(int j = 0; j < hospital.getBloodBags().size(); j++) {
             JOptionPane.showMessageDialog(null, hospital.getBloodBags().toString());
         }
+    }
+
+    public static void addDonor() {
+        String ic = JOptionPane.showInputDialog(null, "Enter Donor's IC");
+        String name = JOptionPane.showInputDialog(null, "Enter Donor's Name");
+        String contact = JOptionPane.showInputDialog(null, "Enter Donor's Contact");
+
+        /* Blood Group */
+        String bloodGroup = "";
+
+        Object[] bloodG = {"A", "B", "AB", "O"};
+        int chosenOption = JOptionPane.showOptionDialog(null, "Please Choose Donor's Blood Group", "Donor's Blood Group", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, bloodG, bloodG[0]);
+        switch (chosenOption) {
+            case 0: bloodGroup = "A"; break;
+            case 1: bloodGroup = "B"; break;
+            case 2: bloodGroup = "AB"; break;
+            case 3: bloodGroup = "O"; break;
+        }
+        /* Blood Group */
+
+        /* Rh Group */
+        Object[] rh = {"+", "-"};
+        chosenOption = JOptionPane.showOptionDialog(null, "Please Choose Donor's Blood Rh", "Donor's Blood Group", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, rh, rh[0]);
+        switch (chosenOption) {
+            case 0: bloodGroup += "+"; break;
+            case 1: bloodGroup += "-"; break;
+        }
+        /* Blood Group */
+
+        double volume = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter Donor's Transfusion Volume (mL)"));
+        Blood blood = new Blood(bloodGroup, volume);
+        Donor donor = new Donor(ic, name, contact, blood);
+        donorQueue.enqueue(donor);
+
+        JOptionPane.showMessageDialog(null, "Donor " + donor.getName() + " donorAdded to Queue");
+    }
+
+    public static void transferBloodBag() {
+
     }
 }
