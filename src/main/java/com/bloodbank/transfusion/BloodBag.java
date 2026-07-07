@@ -9,14 +9,20 @@ import com.bloodbank.io.Recordable;
 
 import java.time.LocalDateTime;
 
-public class Bag implements Recordable {
-    private static final int SHELF_LIFE_DAYS = 42;
+public class BloodBag implements Recordable {
+    private int bloodBagId;
     private Donor donor;
     private LocalDateTime transfusionDateTime;
+    private static final int SHELF_LIFE_DAYS = 42;
 
-    public Bag(Donor donor, LocalDateTime transfusionDateTime) {
+    public BloodBag(int bloodBagId, Donor donor, LocalDateTime transfusionDateTime) {
+        this.bloodBagId = bloodBagId;
         this.donor = donor;
         this.transfusionDateTime = transfusionDateTime;
+    }
+
+    public int getBloodBagId() {
+        return bloodBagId;
     }
 
     public Donor getDonor() {
@@ -37,13 +43,15 @@ public class Bag implements Recordable {
 
     @Override
     public String toString() {
-        return "Donor's NRIC: "+donor.getNRIC() +
-                "Transfusion date: " + getTransfusionDateTime() +
-                "Expiry date: "+getExpiryDate();
+        return  "Blood Bag ID: " + bloodBagId +
+                "\nDonor's NRIC: " +donor.getNRIC() +
+                "\nTransfusion date: " + getTransfusionDateTime() +
+                "\nExpiry date: " + getExpiryDate() +
+                "\nIs Expired: " + isExpired();
     }
 
     @Override
     public String toRecord() {
-        return donor.toRecord() + ";" + transfusionDateTime;
+        return bloodBagId + ";" + donor.toRecord() + ";" + transfusionDateTime;
     }
 }

@@ -36,14 +36,12 @@ public abstract class FileHandler<T extends Recordable> {
      * @return true if file is saved
      */
     public boolean saveRecords(LinkedList objects) {
-        this.objects = objects;
-
-        if (this.objects == null) {
+        if (objects == null) {
             return false;
         }
 
         try (PrintWriter outputFile = new PrintWriter(file)) {
-            T obj = (T) this.objects.getFirst();
+            T obj = (T) objects.getFirst();
             while (obj != null) {
                 outputFile.println(obj.toRecord());
                 obj = (T) objects.getNext();

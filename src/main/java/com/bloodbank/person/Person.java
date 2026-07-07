@@ -64,7 +64,7 @@ public abstract class Person implements Recordable {
     }
 
     public String toRecord() {
-        return String.format("%s;%s;%s", nric, name, contact);
+        return nric + ";" + name + ";" + contact;
     }
     /* Printers */
 }

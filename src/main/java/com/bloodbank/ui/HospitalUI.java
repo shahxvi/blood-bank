@@ -2,27 +2,30 @@ package com.bloodbank.ui;
 
 import javax.swing.JOptionPane;
 
-import com.bloodbank.io.HospitalFileHandler;
+import com.bloodbank.Main;
 import com.bloodbank.recipient.Hospital;
-import com.bloodbank.util.LinkedList;
 
-public class HospitalUI extends UI {
-    static HospitalFileHandler hospitalFileHandler = new HospitalFileHandler("data/hospitals.txt");
-    static LinkedList hospitalList = hospitalFileHandler.parseRecords();
-
+public class HospitalUI {
     /**
      * Menu to manage hospital
      * @author Shah
      */
     public static void menu() {
-        Object[] options = { "Add Hospital", "Remove Hospital" };
-        int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your option", "Manage Hospital List", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        switch (chosenOption) {
-            case 0: addHospital(); break;
-            case 1: removeHospital(); break;
+        Object[] options = { "Add Hospital", "Remove Hospital", "Edit Hospital", "Search Hospital" };
+
+        boolean exit = false;
+        while (!exit) {
+            int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your option", "Manage Hospital List", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            switch (chosenOption) {
+                case 0: addHospital(); break;
+                case 1: removeHospital(); break;
+                case 2: editHospital(); break;
+                case 3: searchHospital(); break;
+                default: exit = true;
+            }
         }
 
-        hospitalFileHandler.saveRecords(hospitalList);
+        Main.hospitalFileHandler.saveRecords(Main.hospitalList);
     }
 
     /**
@@ -37,7 +40,7 @@ public class HospitalUI extends UI {
         double distance = Double.parseDouble(distanceStr);
         String contact = JOptionPane.showInputDialog("Enter Hospital's Contact Number");
 
-        hospitalList.insertAtBack(new Hospital(name, address, distance, contact));
+        Main.hospitalList.insertAtBack(new Hospital(Main.hospitalList.getSize() + 1, name, address, distance, contact));
         JOptionPane.showMessageDialog(null, "Hospital successfully added");
     }
 
@@ -47,33 +50,81 @@ public class HospitalUI extends UI {
      * @author Iqbal
      */
     public static void removeHospital() {
-        Object[] obj = new Object[hospitalList.getSize()];
+        Object[] obj = new Object[Main.hospitalList.getSize()];
 
-        Hospital hospital = (Hospital) hospitalList.getFirst();
+        Hospital hospital = (Hospital) Main.hospitalList.getFirst();
         for (int i = 0; i < obj.length; i++) {
-            obj[i++] = hospital.toRecord();
-            hospital = (Hospital) hospitalList.getNext();
+            obj[i++] = hospital.getName();
+            hospital = (Hospital) Main.hospitalList.getNext();
         }
 
-        String chosenHospital = (String) JOptionPane.showInputDialog(null, "Which hospital would you like to remove?",
-                "Remove Item", JOptionPane.QUESTION_MESSAGE, null, obj, obj[0]);
+        String chosenHospital = (String) JOptionPane.showInputDialog(null, "Which hospital would you like to remove?", "Remove Item", JOptionPane.QUESTION_MESSAGE, null, obj, obj[0]);
+        if (chosenHospital == null) {
+            return;
+        }
 
-        hospital = (Hospital) hospitalList.getFirst();
+        hospital = (Hospital) Main.hospitalList.getFirst();
         for (int i = 0; i < obj.length; i++) {
-            if (chosenHospital.equals(hospital.toRecord())){
-                hospitalList.removeCurrent();
+            if (chosenHospital.equals(hospital.getName())){
+                Main.hospitalList.removeCurrent();
                 System.out.println("[SUCCESS] Hospital '" + hospital.getName() + "' successfully removed.");
                 break;
             }
-            hospital = (Hospital) hospitalList.getNext();
+            hospital = (Hospital) Main.hospitalList.getNext();
         }
-        
     }
 
     /**
      * Menu to edit hospital from hospital list
+     * @author Shah
      * @author Maya
      */
     public static void editHospital() {
+        String hospitalIdStr = JOptionPane.showInputDialog("Enter Hospital ID to Update: ");
+        if (hospitalIdStr == null) {
+            return;
+        }
+
+        int hospitalId = Integer.parseInt(hospitalIdStr);
+
+        boolean found = false;
+        Hospital hospital = (Hospital) Main.hospitalList.getFirst();
+        while (hospital != null && !found) {
+            if (hospital.getHospitalId() == hospitalId) {
+                found = true;
+            } else {
+                hospital = (Hospital) Main.hospitalList.getNext();
+            }
+        }
+
+        if (!found && hospital == null) {
+            JOptionPane.showMessageDialog(null, "Error: No Mathcing Hospital ID Found");
+            return;
+        }
+
+        boolean exit = false;
+        while (!exit) {
+            Object[] options = { "Edit Hospital Name" , "Edit Hospital's Address", "Update Hospital's Distance", "Update Hospital's Contact Number" };
+            int chosenOption = JOptionPane.showOptionDialog(null, "Please choose your option", "Update Hospital Details", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            switch (chosenOption) {
+                case 0: hospital.setName(JOptionPane.showInputDialog("Enter Hospital's New Name")); break;
+                case 1: hospital.setAddress(JOptionPane.showInputDialog("Enter Hospital's New Address")); break;
+                case 2: hospital.setDistance(Double.parseDouble(JOptionPane.showInputDialog("Enter Hospital's New Distance"))); break;
+                case 3: hospital.setContact(JOptionPane.showInputDialog("Enter Hospital's New Name")); break;
+                default: exit = true;
+            }
+
+            if (!exit) {
+                JOptionPane.showMessageDialog(null, "Hospital details updated successfully!");
+            }
+        }
+    }
+
+    /**
+     * Menu to search for a hospital
+     * @author Marzell
+     */
+    public static void searchHospital() {
+        //TODO: Implment searchHospital() by hospitalId
     }
 }

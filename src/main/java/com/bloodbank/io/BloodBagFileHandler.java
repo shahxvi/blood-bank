@@ -5,7 +5,7 @@
 package com.bloodbank.io;
 
 import com.bloodbank.person.Donor;
-import com.bloodbank.transfusion.Bag;
+import com.bloodbank.transfusion.BloodBag;
 import com.bloodbank.transfusion.Blood;
 import com.bloodbank.util.LinkedList;
 
@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class BagFileHandler extends FileHandler<Bag> {
-    public BagFileHandler(String filePath){
+public class BloodBagFileHandler extends FileHandler<BloodBag> {
+    public BloodBagFileHandler(String filePath){
         super(filePath);
     }
 
@@ -25,13 +25,14 @@ public class BagFileHandler extends FileHandler<Bag> {
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
 
+                int bloodBagId = Integer.parseInt(tokens.nextToken());
                 String nric = tokens.nextToken();
                 String name = tokens.nextToken();
                 String contact = tokens.nextToken();
                 Blood blood = new Blood(tokens.nextToken(), Double.parseDouble(tokens.nextToken()));
                 LocalDateTime transfusionDateTime = LocalDateTime.parse(tokens.nextToken());
 
-                super.objects.insertAtFront(new Bag(new Donor(nric, name, contact, blood), transfusionDateTime));
+                super.objects.insertAtBack(new BloodBag(bloodBagId, new Donor(nric, name, contact, blood), transfusionDateTime));
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

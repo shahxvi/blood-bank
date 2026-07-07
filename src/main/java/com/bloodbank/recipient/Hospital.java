@@ -6,12 +6,14 @@ package com.bloodbank.recipient;
 import com.bloodbank.io.Recordable;
 
 public class Hospital implements Recordable {
+    private int hospitalId;
     private String name;
     private String address;
     private double distance;
     private String contact;
 
-    public Hospital(String name, String address, double distance, String contact) {
+    public Hospital(int hospitalId, String name, String address, double distance, String contact) {
+        this.hospitalId = hospitalId;
         this.name = name;
         this.address = address;
         this.distance = distance;
@@ -19,6 +21,10 @@ public class Hospital implements Recordable {
     }
 
     /* Setters */
+    public void setHospitalId(int hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
     public void setName (String name) {
         this.name = name;
     }
@@ -37,6 +43,10 @@ public class Hospital implements Recordable {
     /* Setters */
 
     /* Getters */
+    public int getHospitalId() {
+        return hospitalId;
+    }
+
     public String getName () {
         return name;
     }
@@ -56,14 +66,15 @@ public class Hospital implements Recordable {
 
     /* Printers */
     public String toString() {
-        return "Name: " + name +
+        return "Hospital ID: " + hospitalId +
+               "\nName: " + name +
                "\nAddress: " + address +
                "\nDistance: " + distance + "KM" +
                "\nContact: " + contact;
     }
 
     public String toRecord() {
-        return name + ";" + address + ";" + distance + ";" + contact;
+        return hospitalId + ";" + name + ";" + address + ";" + distance + ";" + contact;
     }
     /* Printers */
 }

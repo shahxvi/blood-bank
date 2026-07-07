@@ -21,12 +21,13 @@ public class HospitalFileHandler extends FileHandler<Hospital> {
             while (fileReader.hasNext()) {
                 StringTokenizer tokens = new StringTokenizer(fileReader.nextLine(), ";");
 
+                int hospitalId = Integer.parseInt(tokens.nextToken());
                 String name = tokens.nextToken();
                 String address = tokens.nextToken();
                 double distance = Double.parseDouble(tokens.nextToken());
                 String contact = tokens.nextToken();
 
-                super.objects.insertAtFront(new Hospital(name, address, distance, contact));
+                super.objects.insertAtBack(new Hospital(hospitalId, name, address, distance, contact));
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

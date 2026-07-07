@@ -112,8 +112,8 @@ public class LinkedList {
     }
 
     /**
-     * 
      * @return size of LinkedList
+     * @author Shah
      */
     public int getSize() {
         int size = 0;
@@ -126,6 +126,9 @@ public class LinkedList {
         return size;
     }
 
+    /**
+     * @author Iqbal
+     */
     public void removeCurrent() {
         if (current == null) {
             return;

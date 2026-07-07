@@ -71,7 +71,7 @@ public class Blood implements Recordable {
     }
 
     public String toRecord() {
-        return String.format("%s;%f", group, volume);
+        return group + ";" + volume;
     }
     /* Printers */
 }
